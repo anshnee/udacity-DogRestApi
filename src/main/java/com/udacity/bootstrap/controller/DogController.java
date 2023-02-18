@@ -14,10 +14,13 @@ import java.util.List;
 
 @RestController
 public class DogController {
-@Autowired
+
 private DogService dogService;
 
-
+    @Autowired
+    public void setDogService(DogService dogService) {
+        this.dogService = dogService;
+    }
 
 @GetMapping("/dogs")
 public ResponseEntity<List<Dog>> allDogs(){
@@ -26,7 +29,7 @@ public ResponseEntity<List<Dog>> allDogs(){
     return new ResponseEntity<List<Dog>>(list, HttpStatus.OK);
 }
 
-@GetMapping("dogs/breeds")
+@GetMapping("/dogs/breeds")
     public ResponseEntity<List<String>> breedDetails(){
 
     List<String> list = dogService.retrieveDogBreed();
@@ -41,7 +44,7 @@ public ResponseEntity<List<Dog>> allDogs(){
     return new ResponseEntity<List<String>>(list,HttpStatus.OK);
     }
 
-    @GetMapping("{id}/breeds")
+    @GetMapping("/{id}/breeds")
     public ResponseEntity<String> breedDetailsById( @PathVariable long id) throws DogNotFoundException {
 
         String list= dogService.retrieveDogBreedById(id);
