@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DogRepository extends CrudRepository <Dog, Id>{
+public interface DogRepository extends CrudRepository <Dog, Long>{
 
     @Query("select d.id , d.breed from Dog d")
     List<String> getBreedDetails();
